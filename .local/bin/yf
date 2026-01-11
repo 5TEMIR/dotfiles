@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ "$*" != "" ]; then
+    IFS='\n' echo "$*"
+else
+    fzf --multi
+fi | xargs readlink -f |
+    awk '{ print "file://" $0 }' |
+    wl-copy -t text/uri-list

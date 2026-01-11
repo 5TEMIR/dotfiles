@@ -1,0 +1,162 @@
+/* tokyonight */
+@define-color bg #1a1b26;
+@define-color bg-dark1 #0c0e14;
+@define-color bg-highlight #292e42;
+@define-color white #a9b1d6;
+@define-color black #16161e;
+@define-color green #9ece6a;
+@define-color red #f7768e;
+@define-color cyan #7dcfff;
+@define-color blue #7aa2f7;
+@define-color yellow #e0af68;
+@define-color purple #bb9af7;
+
+@define-color bright-black #414868;
+
+@define-color bg-color @bg-dark1;
+@define-color bg-second-color @bg-highlight;
+@define-color fg-color @white;
+@define-color empty-color @bright-black;
+@define-color hover-color @bg;
+
+* {
+    font-family: JetBrainsMono NFP;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+window#waybar {
+    background-color: @bg-color;
+}
+
+#workspaces,
+#clock,
+#tray,
+#cpu,
+#temperature,
+#memory,
+#language,
+#network {
+    color: @fg-color;
+    border-radius: 4px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding: 2px 0px;
+}
+
+#workspaces {
+    margin-left: 6px;
+}
+
+#workspaces button {
+    color: @fg-color;
+    padding: 0px 8px;
+    margin: 0px 2px;
+    border-radius: 4px;
+    transition: none;
+    border: none;
+    outline: none;
+}
+
+#workspaces button.active {
+    color: @fg-color;
+    background: @bg-second-color;
+}
+
+#workspaces button.empty {
+    color: @empty-color;
+}
+
+#workspaces button.empty.active {
+    color: @empty-color;
+    background: @bg-second-color;
+}
+
+#workspaces button:hover {
+    background: @hover-color;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#workspaces button:hover.active {
+    color: @fg-color;
+    background: @bg-second-color;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#workspaces button:hover.empty.active {
+    color: @empty-color;
+    background: @bg-second-color;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#clock {
+    color: @fg-color;
+}
+
+#tray {
+    background: transparent;
+    color: @fg-color;
+}
+
+#mpd {
+    color: @fg-color;
+    min-width: 16px;
+    margin-left: 16px;
+}
+
+#cpu,
+#temperature,
+#memory {
+    min-width: 56px;
+    background: @bg-second-color;
+;
+}
+
+#cpu {
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    margin-left: 16px;
+    padding-left: 8px;
+    color: @fg-color;
+}
+
+#temperature {
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    padding: 0px 8px;
+    color: @fg-color;
+}
+
+#memory {
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    margin-right: 16px;
+    padding-right: 8px;
+    color: @fg-color;
+}
+
+#language,
+#network {
+    min-width: 36px;
+    margin-right: 8px;
+}
+
+#network {
+    margin-right: 6px;
+}
+
+tooltip {
+    border-radius: 4px;
+    border: none;
+    background-color: @bg-second-color;
+}
+
+tooltip label {
+    text-shadow: none;
+    color: @fg-color;
+}

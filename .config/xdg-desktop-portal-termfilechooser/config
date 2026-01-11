@@ -1,0 +1,8 @@
+[filechooser]
+cmd=yazi-wrapper.sh
+default_dir=$HOME
+env=TERMCMD='foot -T "Terminal filechooser"'
+
+; Mode must be one of 'suggested', 'default', or 'last'.
+open_mode=suggested
+save_mode=suggested

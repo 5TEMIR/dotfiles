@@ -1,0 +1,126 @@
+* {
+    font-family: "Fira Sans Semibold", "Font Awesome 7 Free", "Font Awesome 7 Brands", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+}
+
+window#waybar {
+    background-color: rgba(18, 32, 34, 0.5);
+}
+
+/* General */
+#workspaces,
+#clock,
+#tray,
+#cpu,
+#temperature,
+#memory,
+#language,
+#network {
+    color: #1c1e2b;
+    background: #e3f1f3;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin: 8px 0px;
+}
+
+#workspaces {
+    margin-left: 8px;
+    padding: 4px 2px;
+}
+
+#workspaces button {
+    color: #46e9ff;
+    background: #595f6d;
+    padding: 0px 8px;
+    margin: 0px 2px;
+    border-radius: 2px;
+    transition: all 0.1s linear;
+    border: none;
+    outline: none;
+}
+
+#workspaces button.active {
+    color: #46e9ff;
+    background: #1c1e2b;
+}
+
+#workspaces button.empty {
+    color: #e3f1f3;
+    background: #595f6d;
+}
+
+#workspaces button.empty.active {
+    color: #e3f1f3;
+    background: #1c1e2b;
+}
+
+#workspaces button:hover {
+    background: #343c4c;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#workspaces button:hover.active {
+    color: #46e9ff;
+    background: #1c1e2b;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#workspaces button:hover.empty.active {
+    color: #e3f1f3;
+    background: #1c1e2b;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#clock {}
+
+#tray {
+    margin-right: 8px;
+    background: transparent;
+    color: #e3f1f3;
+}
+
+#cpu,
+#temperature,
+#memory {
+    min-width: 44px;
+}
+
+#cpu {
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+#temperature {
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+#memory {
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    margin-right: 8px;
+}
+
+#language,
+#network {
+    min-width: 28px;
+    margin-right: 8px;
+}
+
+tooltip {
+    border-radius: 5px;
+    border: 2px solid #5c7c7c;
+    background-color: #1c1e2b;
+}
+
+tooltip label {
+    text-shadow: none;
+    color: #e3f1f3;
+}

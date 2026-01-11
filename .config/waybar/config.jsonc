@@ -1,0 +1,88 @@
+{
+    "layer": "top",
+    "position": "top",
+    
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "tray",
+        "mpd",
+        "cpu",
+        "temperature",
+        "memory",
+        "hyprland/language",
+        "network"
+    ],
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+    "clock": {
+        "format": "{:%d.%m %a %H:%M}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#0db9d7'><b>{}</b></span>",
+                "days": "<span color='#a9b1d6'><b>{}</b></span>",
+                "weekdays": "<span color='#7aa2f7'><b>{}</b></span>",
+                "today": "<span color='#7dcfff'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "tray": {
+        "spacing": 8
+    },
+    "mpd": {
+        "format": "{stateIcon}",
+        "interval": 5,
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "cpu": {
+        "align": 1,
+        "interval": 1,
+        "format": "{usage}% "
+    },
+    "temperature": {
+        "align": 1,
+        "interval": 2,
+        "format": "{temperatureC}°C "
+    },
+    "memory": {
+        "align": 1,
+        "interval": 2,
+        "format": "{}% "
+    },
+    "hyprland/language": {
+        "format": "{}",
+        "format-en": "ENG",
+        "format-ru": "РУС"
+    },
+    "network": {
+        "format-ethernet": "",
+        "format-disconnected": "󰌙",
+        "tooltip": false
+    }
+}

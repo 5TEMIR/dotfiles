@@ -1,0 +1,135 @@
+* {
+    font-family: "Noto Sans", "Font Awesome 7 Free", "Font Awesome 7 Brands", "Font Awesome 6 Free", "Font Awesome 6 Brands", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+window#waybar {
+    background-color: #0a0a0a;
+    /* border-top: 2px solid #343c4c; */
+}
+
+/* General */
+#workspaces,
+#clock,
+#tray,
+#cpu,
+#temperature,
+#memory,
+#language,
+#network {
+    color: #ECECEC;
+    border-radius: 4px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding: 2px 0px;
+}
+
+#workspaces {
+    margin-left: 6px;
+}
+
+#workspaces button {
+    color: #ECECEC;
+    padding: 0px 8px;
+    margin: 0px 2px;
+    border-radius: 4px;
+    transition: all 0.1s linear;
+    border: none;
+    outline: none;
+}
+
+#workspaces button.active {
+    color: #ECECEC;
+    background: #2E2E2E;
+}
+
+#workspaces button.empty {
+    color: #616161;
+}
+
+#workspaces button.empty.active {
+    color: #616161;
+    background: #2E2E2E;
+}
+
+#workspaces button:hover {
+    background: #1B1B1B;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#workspaces button:hover.active {
+    color: #ECECEC;
+    background: #2E2E2E;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#workspaces button:hover.empty.active {
+    color: #616161;
+    background: #2E2E2E;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#clock {}
+
+#tray {
+    background: transparent;
+    color: #ECECEC;
+}
+
+#mpd {
+    min-width: 16px;
+    margin-left: 16px;
+}
+
+#cpu,
+#temperature,
+#memory {
+    min-width: 56px;
+    background: transparent;
+}
+
+#cpu {
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    margin-left: 16px;
+    padding-left: 8px;
+}
+
+#temperature {
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+#memory {
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    margin-right: 16px;
+    padding-right: 8px;
+}
+
+#language,
+#network {
+    min-width: 36px;
+    margin-right: 8px;
+}
+
+#network {
+    margin-right: 6px;
+}
+
+tooltip {
+    border-radius: 4px;
+    border: none;
+    background-color: #2E2E2E;
+}
+
+tooltip label {
+    text-shadow: none;
+    color: #ECECEC;
+}

@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Получаем список плейлистов с поддержкой пробелов (через mapfile)
+mapfile -t playlists < <(mpc lsplaylists)
+
+# Получаем текущий плейлист
+current_playlist=$(mpc playlist -f "%file%" | head -n 1 | awk -F'/' '{print $(NF-1)}')
+
+# Если текущий плейлист не определён, выбираем первый из списка
+if [[ -z "$current_playlist" ]]; then
+    next_playlist="${playlists[0]}"
+else
+    # Ищем индекс текущего плейлиста
+    found=0
+    for i in "${!playlists[@]}"; do
+        if [[ "${playlists[i]}" == "$current_playlist" ]]; then
+            next_index=$(( (i - 1) % ${#playlists[@]} ))
+            next_playlist="${playlists[next_index]}"
+            found=1
+            break
+        fi
+    done
+
+    # Если текущий плейлист не найден (например, был удалён), берём первый
+    if [[ "$found" -eq 0 ]]; then
+        next_playlist="${playlists[0]}"
+    fi
+fi
+
+# Загружаем следующий плейлист
+mpc clear
+mpc load "$next_playlist"
+mpc play
+
+echo "Switched to playlist: $next_playlist"
+
+notify-send "Previous playlist" "$next_playlist"

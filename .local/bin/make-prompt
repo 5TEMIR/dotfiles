@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+exclude_patterns=(
+    '/.'
+    '/.git/'
+    '/__pycache__/'
+    '/node_modules/'
+    '.log'
+    '.tmp'
+)
+
+for pattern in "$@"; do
+    if [[ "$pattern" != "-o" ]]; then
+        exclude_patterns+=("$pattern")
+    fi
+done
+
+find_args=()
+for pattern in "${exclude_patterns[@]}"; do
+    find_args+=(-not -path "*$pattern*")
+done
+
+if [[ " $@ " =~ " -o " ]]; then
+    output_file="$HOME/downloads/pr.txt"
+    
+    for ((i=1; i<=$#; i++)); do
+        if [[ "${!i}" == "-o" && $((i+1)) -le $# && ${!((i+1))} != -* ]]; then
+            output_file="${!((i+1))}"
+            break
+        fi
+    done
+    
+    echo "Сохранение в файл: $output_file"
+    
+    temp_file=$(mktemp)
+    
+    find . -type f "${find_args[@]}" -exec sh -c '
+        echo "=== {} ==="
+        cat {}
+        echo
+    ' \; > "$temp_file"
+    
+    file_size=$(wc -c < "$temp_file")
+    max_size=95000
+    
+    if [[ $file_size -gt $max_size ]]; then
+        echo "Файл большой, делим на части..."
+        
+        split -b 95K "$temp_file" "${output_file%.*}"
+        
+        for part in "${output_file%.*}"*; do
+            mv "$part" "${part}.txt"
+            echo "Создана часть: ${part}.txt"
+        done
+        
+        rm -f "$temp_file"
+        echo "Готово"
+    else
+        mv "$temp_file" "$output_file"
+        echo "Сохранено в: $output_file"
+    fi
+else
+    find . -type f "${find_args[@]}" -exec sh -c 'echo -e "=== {} ==="; cat {}; echo' \;
+fi
+
+# echo '
+# Ты - сеньор-инженер. Если не хватает контекста, сначала задай три уточняющих
+# вопроса и дождись ответов. Когда контекст достаточен, дай минимальный рабочий
+# код единым фрагментом, затем кратко объясни ключевые решения и крайние случаи,
+# затем приведи минимальный тест‑пример запуска. Избегай лишних зависимостей,
+# пиши просто и надёжно. Если есть более удобная альтернатива - укажи её одним
+# абзацем.
+#
+# Если нужно создать архотектуру приложения или новые файлы, модули - пиши
+# команды bash без лишних комментариев. Для создания проекта с нуля - создавай
+# папку проекта (название придумывай сам), переходи в эту папку и создавай
+# архитектуру приложения.
+# '

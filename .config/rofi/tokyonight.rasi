@@ -1,0 +1,109 @@
+configuration {
+    modes: ["drun", "run"];
+    font: "JetBrainsMono Nerd Font Propo bold 15";
+    drun-display-format: "{icon}{name}";
+    sorting-method: "fzf";
+    sort: true;
+    matching: "fuzzy";
+    tokenize: true;
+    disable-history: false;
+    cache-dir: "~/.local/share/rofi/";
+
+    drun {
+        display-name: ":";
+    }
+
+    run {
+        display-name: ">";
+    }
+
+    window {
+        display-name: "";
+    }
+
+    kb-element-next: "";
+    kb-element-prev: "";
+    kb-mode-next: "Tab";
+    kb-row-select: "Alt+space";
+}
+
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+    
+    bg: #1a1b26;
+    bg-dark1: #0c0e14;
+    bg-highlight: #292e42;
+    bg-selection: #283457;
+    black: #16161e;
+    white: #a9b1d6;
+    bright-white: #c0caf5;
+    bright-black: #414868;
+    blue1: #2ac3de;
+    blend-blue1: #27A1B9;
+    orange: #ff966c;
+    
+    background-color: @bg-dark1;
+    text-color: @white;
+    highlight: @blue1;
+    highlight-background: @blue1;
+}
+
+window {
+    transparency: "real";
+    width: 600px;
+}
+
+mainbox {
+    children: [inputbar, listview];
+}
+
+inputbar {
+    children: [prompt, entry];
+    // margin: 4px;
+    // border: 1px;
+    // border-radius: 4px;
+    // border-color: @orange;
+}
+
+entry {
+    background-color: inherit;
+    padding: 8px 0px;
+}
+
+prompt {
+    background-color: inherit;
+    padding: 8px;
+}
+
+listview {
+    lines: 5;
+    // margin: 4px;
+    // border: 1px;
+    // border-radius: 4px;
+    // border-color: @blend-blue1;
+}
+
+element {
+    children: [element-icon, element-text];
+}
+
+element-icon {
+    size: 64px;
+    padding: 8px;
+}
+
+element-text {
+    padding: 24px 0px;
+}
+
+element-text selected {
+	background-color: @bg-highlight;
+}
+
+element-icon selected {
+	background-color: @bg-highlight;
+}
+
