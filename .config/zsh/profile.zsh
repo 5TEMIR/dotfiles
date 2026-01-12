@@ -19,7 +19,6 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export GOPATH="$XDG_DATA_HOME/go"
 
 
-
 export PATH="$PATH:$(find ~/.local/bin -type d | paste -sd ':' -)"
 export PATH="$PATH:/opt/android-sdk/tools/bin"
 export PATH="$PATH:/opt/android-sdk/platform-tools"

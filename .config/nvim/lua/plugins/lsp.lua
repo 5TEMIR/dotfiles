@@ -53,7 +53,10 @@ return {
         })
 
         vim.lsp.config("rust_analyzer", {
+            cmd = { "rust-analyzer" },
             capabilities = capabilities,
+            filetypes = { "rust" },
+            root_markers = { "Cargo.toml", "rust-project.json", ".git" },
             settings = {
                 ["rust-analyzer"] = {
                     cargo = { allFeatures = true },

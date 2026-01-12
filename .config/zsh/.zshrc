@@ -19,11 +19,22 @@ zmodload zsh/complist
 autoload -U compinit
 autoload -U colors && colors
 
+bindkey -e
+export KEYTIMEOUT=1
+
 if [[ -z "$TMUX" ]] && command -v tmux &> /dev/null && [[ -n "$PS1" ]] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]]; then
   exec tmux new-session -A -s main
 fi
 
 [ -f "$XDG_CONFIG_HOME/zsh/alias.zsh" ] && source "$XDG_CONFIG_HOME/zsh/alias.zsh"
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
 
 eval "$(fzf --zsh)"
 
@@ -35,24 +46,17 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
-}
-
 
 ###################
 ### KEYBINDINGS ###
 ###################
 
-bindkey -e
-export KEYTIMEOUT=1
 bindkey "^[" vi-cmd-mode
 bindkey -M menuselect "^p" vi-up-line-or-history
 bindkey -M menuselect "^n" vi-down-line-or-history
+bindkey -M menuselect "^[" send-break
+bindkey -M menuselect "^y" accept-line
+
 
 ###############
 ### HISTORY ###
