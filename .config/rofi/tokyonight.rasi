@@ -1,12 +1,13 @@
 configuration {
     modes: ["drun", "run"];
     font: "JetBrainsMono Nerd Font Propo bold 15";
-    drun-display-format: "{icon}{name}";
+    drun-display-format: "{name}";
     sorting-method: "fzf";
     sort: true;
     matching: "fuzzy";
     tokenize: true;
     disable-history: false;
+    // scroll-method: 1;
     cache-dir: "~/.local/share/rofi/";
 
     drun {
@@ -23,8 +24,15 @@ configuration {
 
     kb-element-next: "";
     kb-element-prev: "";
+    kb-move-char-forward: "";
     kb-mode-next: "Tab";
-    kb-row-select: "Alt+space";
+    kb-row-select: "Ctrl+[41]";
+    kb-row-down: "Ctrl+[57]";
+    kb-row-up: "Ctrl+[33]";
+    kb-accept-entry: "Return,Ctrl+[58]";
+    kb-cancel: "Escape,Ctrl+[34]";
+    kb-remove-char-back: "BackSpace,Ctrl+[43]";
+    kb-remove-to-sol: "Ctrl+[30]";
 }
 
 * {
@@ -43,7 +51,9 @@ configuration {
     bright-black: #414868;
     blue1: #2ac3de;
     blend-blue1: #27A1B9;
-    orange: #ff966c;
+    orange: #ff9e64;
+    blue: #7aa2f7;
+    cyan: #7dcfff;
     
     background-color: @bg-dark1;
     text-color: @white;
@@ -54,6 +64,10 @@ configuration {
 window {
     transparency: "real";
     width: 600px;
+    // padding: 8px;
+    // border: 1px;
+    // border-radius: 8px;
+    // border-color: @blend-blue1;
 }
 
 mainbox {
@@ -65,21 +79,26 @@ inputbar {
     // margin: 4px;
     // border: 1px;
     // border-radius: 4px;
+    // border: 1px 0px 1px 0px;
     // border-color: @orange;
-}
-
-entry {
-    background-color: inherit;
-    padding: 8px 0px;
-}
-
-prompt {
-    background-color: inherit;
     padding: 8px;
 }
 
+prompt {
+    color: @cyan;
+    background-color: @black;
+    padding: 8px 4px 8px 8px;
+}
+
+entry {
+    background-color: @black;
+    padding: 8px 8px 8px 4px;
+}
+
+
 listview {
-    lines: 5;
+    padding: 8px;
+    lines: 8;
     // margin: 4px;
     // border: 1px;
     // border-radius: 4px;
@@ -91,12 +110,12 @@ element {
 }
 
 element-icon {
-    size: 64px;
-    padding: 8px;
+    size: 40px;
+    padding: 8px 0px 8px 8px;
 }
 
 element-text {
-    padding: 24px 0px;
+    padding: 16px 0px 16px 8px;
 }
 
 element-text selected {

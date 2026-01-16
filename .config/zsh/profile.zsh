@@ -9,15 +9,14 @@ export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
 export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
 export PYTHONUSERBASE="$XDG_DATA_HOME/python"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
-export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
-export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
-export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
-export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
-export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export GOPATH="$XDG_DATA_HOME/go"
-
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 
 export PATH="$PATH:$(find ~/.local/bin -type d | paste -sd ':' -)"
 export PATH="$PATH:/opt/android-sdk/tools/bin"
@@ -28,6 +27,8 @@ export PATH="$PATH:/opt/android-sdk/emulator"
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --highlight-line \
+  --cycle \
+  --height=22 \
   --info=inline-right \
   --ansi \
   --layout=reverse \

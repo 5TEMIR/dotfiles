@@ -2,6 +2,8 @@
 ### THEME ###
 #############
 
+fastfetch
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -54,7 +56,8 @@ _fzf_compgen_dir() {
 bindkey "^[" vi-cmd-mode
 bindkey -M menuselect "^p" vi-up-line-or-history
 bindkey -M menuselect "^n" vi-down-line-or-history
-bindkey -M menuselect "^[" send-break
+bindkey -M menuselect "^[" accept-line
+bindkey -M menuselect "^e" send-break
 bindkey -M menuselect "^y" accept-line
 
 
