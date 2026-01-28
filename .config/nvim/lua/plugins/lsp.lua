@@ -1,10 +1,6 @@
 return {
     "neovim/nvim-lspconfig",
-    dependencies = {
-        "saghen/blink.cmp",
-    },
     config = function()
-
         vim.keymap.del("n", "grn")
         vim.keymap.del("n", "gra")
         vim.keymap.del("n", "grr")
@@ -25,6 +21,7 @@ return {
                 vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
                 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
                 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
                 vim.keymap.set("n", "<leader>f", vim.diagnostic.open_float, opts)
                 vim.keymap.set("n", "<leader>si", builtin.lsp_implementations, opts)
                 vim.keymap.set("n", "<leader>sd", builtin.lsp_document_symbols, opts)
@@ -43,7 +40,6 @@ return {
         })
 
 
-        local capabilities = require("blink.cmp").get_lsp_capabilities()
 
         vim.diagnostic.config({
             virtual_text = true,
@@ -52,11 +48,47 @@ return {
             severity_sort = true,
         })
 
+        vim.lsp.config("texlab", {
+            cmd = { "texlab" },
+            settings = {
+                texlab = {
+                    bibtexFormatter = "texlab",
+                    build = {
+                        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-auxdir=.aux", "%f" },
+                        executable = "latexmk",
+                        forwardSearchAfter = false,
+                        onSave = true
+                    },
+                    chktex = {
+                        onEdit = false,
+                        onOpenAndSave = false
+                    },
+                    diagnosticsDelay = 300,
+                    formatterLineLength = 80,
+                    forwardSearch = {
+                        executable = { "zathura" },
+                        args = { "--synctex-forward", "%l:1:%f", "%p" }
+                    },
+                    latexFormatter = "latexindent",
+                    latexindent = {
+                        modifyLineBreaks = false
+                    }
+                }
+            }
+        })
+        vim.lsp.enable("texlab")
+
+        vim.lsp.config("zk", {
+            cmd = { "zk", "lsp" },
+            filetypes = { "markdown" },
+            root_markers = { ".zk" },
+            workspace_required = true,
+        })
+        vim.lsp.enable("zk")
+
         vim.lsp.config("rust_analyzer", {
             cmd = { "rust-analyzer" },
-            capabilities = capabilities,
             filetypes = { "rust" },
-            root_markers = { "Cargo.toml", "rust-project.json", ".git" },
             settings = {
                 ["rust-analyzer"] = {
                     cargo = { allFeatures = true },
@@ -71,7 +103,6 @@ return {
 
 
         vim.lsp.config("ruff", {
-            capabilities = capabilities,
             on_attach = function (client, _)
                 client.server_capabilities.hoverProvider = false
             end,
@@ -92,7 +123,6 @@ return {
         vim.lsp.enable("ruff")
 
         vim.lsp.config("basedpyright", {
-            capabilities = capabilities,
             on_attach = function (client, _)
                 client.server_capabilities.completionProvider        = false -- use pyrefly for fast response
                 client.server_capabilities.definitionProvider        = false -- use pyrefly for fast response
@@ -126,7 +156,6 @@ return {
         -- vim.lsp.enable("basedpyright")
 
         vim.lsp.config("pyrefly", {
-            capabilities = capabilities,
             on_attach = function (client, _)
                 -- client.server_capabilities.semanticTokensProvider    = false
                 -- client.server_capabilities.codeActionProvider     = false

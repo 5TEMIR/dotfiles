@@ -1,0 +1,57 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+    "logo": {
+        "type": "small",
+        "padding": {
+            "top": 1,
+            "left": 4
+        }
+    },
+    "display": {
+        "separator": " "
+    },
+    "modules": [
+        {
+            "key": "╭───────────╮",
+            "type": "custom"
+        },
+        {
+            "key": "│ {#cyan}{icon} age     {#keys}│",
+            "type": "command",
+            "text": "birth_install=$(stat -c %W /); current=$(date +%s); days_difference=$(( (current - birth_install) / 86400 )); echo $days_difference days"
+        },
+        {
+            "key": "│ {#cyan}{icon} uptime  {#keys}│",
+            "type": "uptime"
+        },
+        {
+            // "key": "│ {#blue}{icon} distro  {#keys}│",
+            // "type": "os"
+            "key": "│ {#blue} distro  {#keys}│", 
+            "type": "command",
+            "text": "echo \"Arch Linux\""
+        },
+        {
+            "key": "│ {#blue}{icon} kernel  {#keys}│",
+            "type": "kernel"
+        },
+        {
+            "key": "│ {#green}{icon} cpu     {#keys}│",
+            "type": "cpu",
+            "showPeCoreCount": true
+        },
+        {
+            "key": "│ {#green}{icon} gpu     {#keys}│",
+            "type": "gpu"
+        },
+        {
+            "key": "│ {#magenta}{icon} disk    {#keys}│",
+            "type": "disk",
+            "folders": "/"
+        },
+        {
+            "key": "╰───────────╯",
+            "type": "custom"
+        }
+    ]
+}

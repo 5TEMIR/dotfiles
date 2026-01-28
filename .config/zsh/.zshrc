@@ -4,6 +4,10 @@
 
 fastfetch
 
+if [[ -z "$TMUX" ]] && command -v tmux &> /dev/null && [[ -n "$PS1" ]] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]]; then
+  tmux new-session -A -s main
+fi
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -24,9 +28,6 @@ autoload -U colors && colors
 bindkey -e
 export KEYTIMEOUT=1
 
-if [[ -z "$TMUX" ]] && command -v tmux &> /dev/null && [[ -n "$PS1" ]] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]]; then
-  exec tmux new-session -A -s main
-fi
 
 [ -f "$XDG_CONFIG_HOME/zsh/alias.zsh" ] && source "$XDG_CONFIG_HOME/zsh/alias.zsh"
 

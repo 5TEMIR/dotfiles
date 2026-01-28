@@ -70,7 +70,7 @@ if [[ -n "$selected" ]]; then
     printf '%s\n' "$selected" | cat - "$HISTORY_FILE" | head -100 > temp
     mv temp "$HISTORY_FILE"
 
-    $BROWSER "https://www.google.com/search?q=$(urlEncode "$selected")" >> /dev/null
+    $BROWSER "https://www.google.com/search?q=$(urlEncode "$selected")" >> /dev/null &
     hyprctl dispatch focuswindow "class:${BROWSER}" >> /dev/null
     notify-send "Web Search" "$selected" >> /dev/null
 else

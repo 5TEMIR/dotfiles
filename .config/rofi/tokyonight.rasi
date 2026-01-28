@@ -2,12 +2,11 @@ configuration {
     modes: ["drun", "run"];
     font: "JetBrainsMono Nerd Font Propo bold 15";
     drun-display-format: "{name}";
-    sorting-method: "fzf";
     sort: true;
+    sorting-method: "fzf";
     matching: "fuzzy";
     tokenize: true;
     disable-history: false;
-    // scroll-method: 1;
     cache-dir: "~/.local/share/rofi/";
 
     drun {
@@ -50,20 +49,21 @@ configuration {
     bright-white: #c0caf5;
     bright-black: #414868;
     blue1: #2ac3de;
-    blend-blue1: #27A1B9;
+    blend-blue1: #27a1b9;
     orange: #ff9e64;
     blue: #7aa2f7;
     cyan: #7dcfff;
     
     background-color: @bg-dark1;
-    text-color: @white;
+    // text-color: @blend-blue1;
+    text-color: @bright-white;
     highlight: @blue1;
     highlight-background: @blue1;
 }
 
 window {
     transparency: "real";
-    width: 600px;
+    width: 400px;
     // padding: 8px;
     // border: 1px;
     // border-radius: 8px;
@@ -119,10 +119,10 @@ element-text {
 }
 
 element-text selected {
-	background-color: @bg-highlight;
+	background-color: @bg-selection;
 }
 
 element-icon selected {
-	background-color: @bg-highlight;
+	background-color: @bg-selection;
 }
 

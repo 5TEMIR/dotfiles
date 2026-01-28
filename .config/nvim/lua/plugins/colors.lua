@@ -12,7 +12,7 @@ return {
             local colors = require("tokyonight.colors").setup({style = "night"})
 
             local highlights = {
-                ["@keyword"]                    = { fg = colors.cyan, bold = true },
+                ["@keyword"]                    = { fg = colors.cyan, bold = true, italic = true },
                 ["@keyword.function"]           = { fg = colors.green1, bold = true },
                 ["Statement"]                   = { link = "@keyword" },
                 ["@variable.builtin"]           = { fg = colors.cyan },

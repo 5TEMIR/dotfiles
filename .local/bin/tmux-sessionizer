@@ -1,19 +1,23 @@
 #!/usr/bin/env bash
 
 SEARCH_DIRS=(
-    $HOME/develop/repos/
-    $HOME/develop/learn/
-    $HOME/develop/study/
-    $HOME/develop/scratch/
+    $HOME/devel/repos/
+    $HOME/devel/learn/
+    $HOME/devel/study/
+    $HOME/devel/scratch/
     $HOME/.config/
     $HOME/.local/
+    $HOME/docs/
 )
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    # selected=$(find "${SEARCH_DIRS[@]}" -mindepth 1 -maxdepth 1 -type d | fzf)
-    selected=$(fd . "${SEARCH_DIRS[@]}" -d 1 -t d | fzf)
+    selected=$(fd . "${SEARCH_DIRS[@]}" -d 1 -t d \
+        | sed "s|^$HOME/||" \
+        | fzf)
+
+    [[ $selected ]] && selected="$HOME/$selected"
 fi
 
 if [[ -z $selected ]]; then

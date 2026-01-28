@@ -1,0 +1,23 @@
+set synctex true
+set synctex-editor-command "texlab inverse-search -i %{input} -l %{line}"
+
+unmap <C-m>
+
+# One page per row by default
+set pages-per-row 1
+
+#stop at page boundries
+set scroll-page-aware "true"
+set scroll-full-overlap 0.01
+set scroll-step 0.01
+
+# maps
+map r reload
+map p print
+map J zoom out
+map K zoom in
+map R rotate
+
+
+#zoom settings
+set zoom-min 10

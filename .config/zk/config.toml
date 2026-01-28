@@ -1,0 +1,10 @@
+[notebook]
+dir = "~/docs/notes/"
+
+[note]
+filename = "{{format-date now '%Y-%m-%d'}}"
+extension = "md"
+template = "default.md"
+
+[format.markdown]
+link-format = "[[{{filename}}|{{title}}]]"

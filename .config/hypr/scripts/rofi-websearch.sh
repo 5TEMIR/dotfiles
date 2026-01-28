@@ -15,4 +15,4 @@ listview {
 }
 '
 
-rofi -theme-str "$ROFI_THEME" -no-sort -modi blocks -show blocks -blocks-wrap ./handler.sh -display-blocks "Web Search:" 2>/dev/null
+rofi -theme-str "$ROFI_THEME" -no-sort -modi blocks -show blocks -blocks-wrap handlers/websearch-history.sh -display-blocks "Web Search:" 2>/dev/null

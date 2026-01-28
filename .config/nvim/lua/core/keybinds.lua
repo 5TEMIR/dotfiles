@@ -43,8 +43,8 @@ for i = 1, 8 do
 	vim.keymap.set({ "n", "t" }, "<Leader>" .. i, ":tabnext " .. i .. "<CR>")
 end
 
-vim.keymap.set("n", "<tab>", "<C-^>")
-vim.keymap.set("n", "<C-i>", "<C-i>")
-
 vim.keymap.set("n", "<M-j>", ":cnext<CR>")
 vim.keymap.set("n", "<M-k>", ":cprev<CR>")
+
+
+vim.keymap.set("t", "<M-space>", "<C-\\><C-n>")

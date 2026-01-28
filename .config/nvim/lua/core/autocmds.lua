@@ -26,3 +26,11 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.cmd("vertical resize 80")
     end
 })
+
+
+vim.api.nvim_create_user_command("Tv", function()
+    vim.cmd("vsplit")
+    vim.cmd("vertical resize 73")
+    vim.cmd("terminal")
+    vim.cmd("startinsert")
+end, {})

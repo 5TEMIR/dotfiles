@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-set -eu
-
 if hyprctl clients | grep -q "class: ${BROWSER}"; then
-    $XDG_CONFIG_HOME/hypr/scripts/rofi-bookmarks/rofi-bookmarks.sh
+    $XDG_CONFIG_HOME/hypr/scripts/handlers/rofi-bookmarks.sh
 else
-    exec "${BROWSER}"
+    nohup $BROWSER >/dev/null 2>&1 &
 fi

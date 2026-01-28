@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
 
-set -eu
-
-current_window=$(hyprctl activewindow | grep -oP "title: \K.*" | head -1)
-
 if hyprctl clients | grep -q "title: ${TERMINAL}"; then
-    if [[ "$current_window" == "${TERMINAL}" ]]; then
-        tmux display-popup -E "~/.local/bin/tmux-sessionizer"
-    fi
+    tmux run-shell "$XDG_CONFIG_HOME/hypr/scripts/handlers/rofi-tmux-sessionizer.sh"
 else
-    exec "${TERMINAL}"
+    ${TERMINAL} &
 fi
