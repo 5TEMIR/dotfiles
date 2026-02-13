@@ -43,8 +43,8 @@ unset_alt   = { fg = "#9d7cd8", bg = "#3b4261" }
 # # Hovered
 # hovered         = { bg = "#292e42" }
 # preview_hovered = { bg = "#292e42" }
-parent  = { reversed = false}
-current = { reversed = false}
+parent  = { reversed = false }
+current = { reversed = false }
 preview = { underline = true }
 
 [status]

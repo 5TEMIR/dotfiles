@@ -2,7 +2,7 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
         vim.keymap.del("n", "grn")
-        vim.keymap.del("n", "gra")
+        vim.keymap.del("x", "gra")
         vim.keymap.del("n", "grr")
         vim.keymap.del("n", "gri")
         vim.keymap.del("n", "grt")
@@ -20,7 +20,7 @@ return {
                 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
                 vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
                 vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
-                vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+                vim.keymap.set({"n", "x"}, "<leader>ca", vim.lsp.buf.code_action, opts)
                 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
                 vim.keymap.set("n", "<leader>f", vim.diagnostic.open_float, opts)
                 vim.keymap.set("n", "<leader>si", builtin.lsp_implementations, opts)
@@ -66,8 +66,8 @@ return {
                     diagnosticsDelay = 300,
                     formatterLineLength = 80,
                     forwardSearch = {
-                        executable = { "zathura" },
-                        args = { "--synctex-forward", "%l:1:%f", "%p" }
+                        args = { "--synctex-forward", "%l:1:%f", "%p" },
+                        executable = "zathura"
                     },
                     latexFormatter = "latexindent",
                     latexindent = {

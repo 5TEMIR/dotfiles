@@ -1,67 +1,56 @@
 return {
     "folke/tokyonight.nvim",
     config = function()
+        local Util = require("tokyonight.util")
         require("tokyonight").setup({
             transparent = false,
+            on_colors = function(colors)
+                -- colors.bg = "#16161e"
+                -- colors.bg_float = "#1a1b26"
+                -- colors.black = Util.blend_bg(colors.bg_dark, 1.5)  
+                -- colors.bg_statusline = Util.blend_bg(colors.bg_dark, 1.5)
+            end,
+            on_highlights = function(highlights, colors)
+
+                -- More blue and cyan
+                -- highlights["@keyword"]                              = { fg = colors.cyan, bold = true, italic = true }
+                -- highlights["@keyword.function"]                     = { fg = colors.green1, bold = true }
+                -- highlights["@keyword.import"]                       = { fg = colors.orange }
+                -- highlights["Statement"]                             = { link = "@keyword" }
+                -- highlights["@variable.builtin"]                     = { fg = colors.cyan }
+                -- highlights["@variable.parameter"]                   = { fg = colors.cyan }
+                -- highlights["@variable.parameter.builtin"]           = { fg = Util.blend_fg(colors.cyan, 0.8) }
+                -- highlights["@module"]                               = { fg = Util.blend_bg(colors.yellow, 1.2) }
+                -- highlights["@lsp.type.interface"]                   = { fg = Util.blend_bg(colors.blue1, 1.3) }
+
+                -- Like default
+                highlights["Function"]                              = { fg = Util.blend_bg(colors.cyan, 1.0) }
+                highlights["Type"]                                  = { fg = Util.blend_bg(colors.cyan, 1.0) }
+                highlights["Special"]                               = { fg = Util.blend_bg(colors.cyan, 1.0) }
+                highlights["@keyword"]                              = { fg = colors.fg, bold = true, italic = true }
+                highlights["@keyword.function"]                     = { fg = colors.fg, bold = true, italic = true }
+                highlights["@keyword.import"]                       = { fg = colors.fg, bold = true }
+                highlights["@constructor"]                          = { fg = colors.fg, bold = true }
+                highlights["Statement"]                             = { link = "@keyword" }
+                highlights["@variable.builtin"]                     = { fg = colors.fg, bold = true }
+                highlights["@variable.parameter"]                   = { fg = Util.blend_bg(colors.blue, 1.0) }
+                highlights["@variable.parameter.builtin"]           = { fg = Util.blend_fg(colors.blue, 0.8) }
+                highlights["@module"]                               = { fg = Util.blend_bg(colors.cyan, 1.0) }
+                highlights["@type"]                                 = { fg = Util.blend_bg(colors.cyan, 1.0) }
+                highlights["@type.builtin"]                         = { fg = Util.blend_bg(colors.cyan, 1.0) }
+                highlights["@type.definition"]                      = { link = "Typedef" }
+                highlights["@type.qualifier"]                       = { link = "@keyword" }
+                highlights["@property"]                             = { fg = Util.blend_bg(colors.green1, 1.0) }
+                highlights["@variable.member"]                      = { fg = Util.blend_bg(colors.green1, 1.0) }
+                highlights["@lsp.type.interface"]                   = { fg = Util.blend_bg(colors.blue1, 1.0) }
+
+                highlights["TabLine"]                               = { fg = colors.fg_gutter, bg = Util.blend_bg(colors.bg_dark, 1.2) }
+                highlights["TabLineSel"]                            = { fg = colors.fg, bg = colors.bg, bold = true }
+                highlights["TabLineFill"]                           = { bg = colors.bg_statusline }
+            end
         })
 
         vim.cmd.colorscheme "tokyonight-night"
-
-        vim.defer_fn(function()
-            local Util = require("tokyonight.util")
-            local colors = require("tokyonight.colors").setup({style = "night"})
-
-            local highlights = {
-                ["@keyword"]                    = { fg = colors.cyan, bold = true, italic = true },
-                ["@keyword.function"]           = { fg = colors.green1, bold = true },
-                ["Statement"]                   = { link = "@keyword" },
-                ["@variable.builtin"]           = { fg = colors.cyan },
-                ["@variable.parameter"]         = { fg = colors.cyan },
-                ["@variable.parameter.builtin"] = { fg = Util.blend_fg(colors.cyan, 0.8) },
-                ["@keyword.import"]             = { fg = colors.red },
-                ["@module"]                     = { fg = colors.blue6 },
-                -- ["@module"]                     = { fg = Util.blend_fg(colors.green1, 0.8) },
-                ["@lsp.type.interface"]         = { fg = Util.blend_bg(colors.blue1, 1.3) },
-                -- ["@type"]                       = { link = "Type" },
-                -- ["@type.builtin"]               = { fg = Util.blend_bg(colors.blue1, 0.8) },
-                -- ["@type.definition"]            = { link = "Typedef" },
-                -- ["@type.qualifier"]             = { link = "@keyword" },
-                -- ["@type"]                       = { fg = colors.fg, bold = true },
-                -- ["@type.builtin"]               = { fg = Util.blend_bg(colors.fg, 0.8), bold = true },
-                -- ["@type.definition"]            = { link = "Typedef" },
-                -- ["@type.qualifier"]             = { link = "@keyword" },
-                -- ["@property"]                   = { fg = colors.green1 },
-                -- ["@variable.member"]            = { fg = colors.green1 },
-            }
-
-            for group, hl in pairs(highlights) do
-                vim.api.nvim_set_hl(0, group, hl)
-            end
-        end, 100)
-
-
-        local inactive_tab_bg = "#181823"
-        local inactive_tab_fg = "#3b4261"
-        local active_tab_bg = "#1a1b26"
-        local active_tab_fg = "#a9b1d6"
-        local tabline_fill_bg = "#16161e"
-
-        vim.api.nvim_set_hl(0, "TabLine", {
-            bg = inactive_tab_bg,
-            fg = inactive_tab_fg,
-            bold = false,
-            italic = false
-        })
-
-        vim.api.nvim_set_hl(0, "TabLineSel", {
-            bg = active_tab_bg,
-            fg = active_tab_fg,
-            bold = true
-        })
-
-        vim.api.nvim_set_hl(0, "TabLineFill", {
-            bg = tabline_fill_bg
-        })
 
         function TabLine()
             local s = ''

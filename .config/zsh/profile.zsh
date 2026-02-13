@@ -1,7 +1,8 @@
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CONFIG_HOME="/home/stemir/.config"
+export XDG_CACHE_HOME="/home/stemir/.cache"
+export XDG_DATA_HOME="/home/stemir/.local/share"
+export XDG_STATE_HOME="/home/stemir/.local/state"
+
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
@@ -19,7 +20,7 @@ export GOPATH="$XDG_DATA_HOME/go"
 export TEXMFHOME="$XDG_DATA_HOME/texmf"
 export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
 export TEXMFCONFIG="$XDG_CONFIG_HOME/texlive/texmf-config"
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
+
 
 export PATH="$PATH:$(find ~/.local/bin -type d | paste -sd ':' -)"
 export PATH="$PATH:/opt/android-sdk/tools/bin"
@@ -61,7 +62,7 @@ export FZF_ALT_C_OPTS="--preview 'eza --tree --git-ignore --color=always {} | he
 
 
 export TERMINAL="foot"
-export BROWSER="chromium"
+export BROWSER="firefox"
 export EDITOR="nvim"
 
 
