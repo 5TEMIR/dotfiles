@@ -5,10 +5,10 @@ return {
         require("tokyonight").setup({
             transparent = false,
             on_colors = function(colors)
-                -- colors.bg = "#16161e"
-                -- colors.bg_float = "#1a1b26"
-                -- colors.black = Util.blend_bg(colors.bg_dark, 1.5)  
-                -- colors.bg_statusline = Util.blend_bg(colors.bg_dark, 1.5)
+                colors.bg = "#16161e"
+                colors.bg_float = Util.blend_bg(colors.bg, 1.5)
+                colors.black = Util.blend_bg(colors.bg, 1.5)
+                colors.bg_statusline = Util.blend_bg(colors.bg, 1.5)
             end,
             on_highlights = function(highlights, colors)
 
@@ -27,6 +27,7 @@ return {
                 highlights["Function"]                              = { fg = Util.blend_bg(colors.cyan, 1.0) }
                 highlights["Type"]                                  = { fg = Util.blend_bg(colors.cyan, 1.0) }
                 highlights["Special"]                               = { fg = Util.blend_bg(colors.cyan, 1.0) }
+                highlights["Keyword"]                              = { fg = colors.fg, bold = true, italic = true }
                 highlights["@keyword"]                              = { fg = colors.fg, bold = true, italic = true }
                 highlights["@keyword.function"]                     = { fg = colors.fg, bold = true, italic = true }
                 highlights["@keyword.import"]                       = { fg = colors.fg, bold = true }
@@ -43,8 +44,9 @@ return {
                 highlights["@property"]                             = { fg = Util.blend_bg(colors.green1, 1.0) }
                 highlights["@variable.member"]                      = { fg = Util.blend_bg(colors.green1, 1.0) }
                 highlights["@lsp.type.interface"]                   = { fg = Util.blend_bg(colors.blue1, 1.0) }
+                highlights["@string.documentation"]                 = { fg = colors.green }
 
-                highlights["TabLine"]                               = { fg = colors.fg_gutter, bg = Util.blend_bg(colors.bg_dark, 1.2) }
+                highlights["TabLine"]                               = { fg = colors.fg_gutter, bg = Util.blend_bg(colors.bg, 1.2) }
                 highlights["TabLineSel"]                            = { fg = colors.fg, bg = colors.bg, bold = true }
                 highlights["TabLineFill"]                           = { bg = colors.bg_statusline }
             end

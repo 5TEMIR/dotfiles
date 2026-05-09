@@ -1,6 +1,2 @@
 [options]
-fullscreen = true
-
-[binds]
-<Ctrl+bracketleft> = quit
-q = ignore
+fullscreen = false

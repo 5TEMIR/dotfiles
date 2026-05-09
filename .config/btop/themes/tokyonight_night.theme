@@ -1,7 +1,7 @@
 # Theme: tokyonight_night
 # By: Folke Lemaitre
 
-theme[main_bg]="#1a1b26"
+theme[main_bg]="#16161e"
 theme[main_fg]="#c0caf5"
 
 # Title color for boxes
@@ -18,19 +18,19 @@ theme[selected_fg]="#7dcfff"
 theme[proc_misc]="#7dcfff"
 
 # Cpu box outline color
-theme[cpu_box]="#27a1b9"
+theme[cpu_box]="#7dcfff"
 
 # Memory/disks box outline color
-theme[mem_box]="#27a1b9"
+theme[mem_box]="#7dcfff"
 
 # Net up/down box outline color
-theme[net_box]="#27a1b9"
+theme[net_box]="#7dcfff"
 
 # Processes box outline color
-theme[proc_box]="#27a1b9"
+theme[proc_box]="#7dcfff"
 
 # Box divider line and small boxes line color
-theme[div_line]="#27a1b9"
+theme[div_line]="#7dcfff"
 
 # Temperature graph colors
 theme[temp_start]="#9ece6a"

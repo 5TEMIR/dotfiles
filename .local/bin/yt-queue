@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+
+QUEUE_DIR="$HOME/.local/state/mpv/yt-queue"
+QUEUE_FILE="$QUEUE_DIR/youtube-queue.m3u"
+SCRIPT_SPEC="$HOME/.config/mpv/scripts-spec/yt-queue.lua"
+
+mkdir -p "$QUEUE_DIR"
+
+get_video_title() {
+    local url="$1"
+    if command -v yt-dlp &> /dev/null; then
+        yt-dlp --get-title --no-warnings "$url" 2>/dev/null || echo "Unknown title"
+    else
+        echo "Unknown title"
+    fi
+}
+
+add_video() {
+    local url="$1"
+    
+    if [ -z "$url" ]; then
+        return 1
+    fi
+    
+    if [[ "$url" =~ (youtube\.com|youtu\.be) ]]; then
+        notify-send "yt-queue" "Adding a video..."
+        local title=$(get_video_title "$url")
+        
+        if [ -z "$title" ]; then
+            title="$url"
+        fi
+        
+        if [ ! -f "$QUEUE_FILE" ] || [ ! -s "$QUEUE_FILE" ]; then
+            echo "#EXTM3U" > "$QUEUE_FILE"
+        fi
+        
+        echo "#EXTINF:0,$title" >> "$QUEUE_FILE"
+        echo "$url" >> "$QUEUE_FILE"
+        
+        local count=$(grep -c "^#EXTINF" "$QUEUE_FILE")
+        
+        notify-send "yt-queue" "Video added: $title"
+        
+        if [ -S /tmp/mpv-socket ] && command -v socat &> /dev/null; then
+            local escaped_title=$(echo "$title" | sed 's/"/\\"/g')
+            local escaped_url=$(echo "$url" | sed 's/"/\\"/g')
+            echo 'script-message add-video "'"$escaped_url"'" "'"$escaped_title"'"' | socat - /tmp/mpv-socket 2>/dev/null &
+        fi
+    else
+        return 1
+    fi
+}
+
+list_queue() {
+    if [ ! -f "$QUEUE_FILE" ] || [ ! -s "$QUEUE_FILE" ]; then
+        return 0
+    fi
+    
+    local n=1
+    local title=""
+    
+    while IFS= read -r line; do
+        if [[ $line == \#EXTINF:* ]]; then
+            title="${line#\#EXTINF:}"
+        elif [[ ! $line =~ ^\# ]]; then
+            if [ -n "$title" ]; then
+                echo "$n. $title"
+                echo "   $line"
+            else
+                echo "$n. $line"
+            fi
+            ((n++))
+            title=""
+        fi
+    done < "$QUEUE_FILE"
+}
+
+clear_queue() {
+    if [ -f "$QUEUE_FILE" ]; then
+        > "$QUEUE_FILE"
+    fi
+}
+
+play_queue() {
+    if [ ! -f "$QUEUE_FILE" ] || [ ! -s "$QUEUE_FILE" ]; then
+        return 1
+    fi
+    
+    if [ ! -f "$SCRIPT_SPEC" ]; then
+        return 1
+    fi
+    
+    local count=$(grep -c "^#EXTINF" "$QUEUE_FILE")
+    if [ "$count" == 0 ]; then
+        notify-send "yt-queue" "Empty queue"
+        return 1
+    fi
+    
+    notify-send "yt-queue" "Starting a queue"
+    mpv --playlist="$QUEUE_FILE" \
+        --input-ipc-server=/tmp/mpv-socket \
+        --script="$SCRIPT_SPEC"
+    
+    rm -f /tmp/mpv-socket
+}
+
+case "${1:-help}" in
+    add)
+        add_video "$2"
+        ;;
+    list|ls)
+        list_queue
+        ;;
+    clear)
+        clear_queue
+        ;;
+    play)
+        play_queue
+        ;;
+    *)
+        exit 1
+        ;;
+esac
